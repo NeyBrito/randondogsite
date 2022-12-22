@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Random Dog</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.js"></script>
+	<script>
+		function imageLoad() {
+
+			var sUrl = "https://random.dog/woof.json";//chamar api do RandonDog
+			$.get(sUrl, function (oResponse) {
+
+				let typeResponse = oResponse.url;
+				if ((result = typeResponse.includes(".jpg")) || (result = typeResponse.includes(".gif")) || (result = typeResponse.includes(".JPEG"))) {
+					$("#img").attr("src", oResponse.url);
+					exibirImg();
+
+				} else if (result = typeResponse.includes(".mp4")) {
+					$("#video").attr("src", oResponse.url);
+					exibirVideo();
+				}
+			});
+		}
+
+		function exibirImg() {
+			var divImg = $("#divImg");
+			divImg.show();
+
+			var divVid = $("#video");
+			divVid.hide();
+		}
+
+		function exibirVideo() {
+			var divVid = $("#video");
+			divVid.show();
+
+			var divImg = $("#divImg");
+			divImg.hide();
+		}
+
+	</script>
+
+</head>
+
+<body>
+	<div><!--Div botão -->
+		<button onclick="imageLoad()">Carregar Imagem</button>
+	</div>
+
+	<div id="divImg"><!--Div Imagem -->		
+		<br />
+		<img id="img" width="400px">
+	</div>
+
+	<div><!--Div Video -->		
+		<br />
+		<video id="video" controls width="400" height="400" autoplay loop hidden="true">
+			<source src=oResponse.url type="video/mp4">
+			<p>Your browser doesn't support HTML5 video. Here is a <a href=oResponse.url>link to the video</a>
+				instead.</p>
+		</video>
+	</div>
+</body>
+
+</html>
